@@ -7,5 +7,4 @@ class PhotoResource < ApplicationResource
   # Direct associations
 
   # Indirect associations
-
 end

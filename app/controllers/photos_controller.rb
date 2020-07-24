@@ -1,15 +1,14 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: %i[show edit update destroy]
 
   # GET /photos
   def index
     @q = Photo.ransack(params[:q])
-    @photos = @q.result(:distinct => true).page(params[:page]).per(10)
+    @photos = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   # GET /photos/1
-  def show
-  end
+  def show; end
 
   # GET /photos/new
   def new
@@ -17,15 +16,14 @@ class PhotosController < ApplicationController
   end
 
   # GET /photos/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /photos
   def create
     @photo = Photo.new(photo_params)
 
     if @photo.save
-      redirect_to @photo, notice: 'Photo was successfully created.'
+      redirect_to @photo, notice: "Photo was successfully created."
     else
       render :new
     end
@@ -34,7 +32,7 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1
   def update
     if @photo.update(photo_params)
-      redirect_to @photo, notice: 'Photo was successfully updated.'
+      redirect_to @photo, notice: "Photo was successfully updated."
     else
       render :edit
     end
@@ -43,17 +41,18 @@ class PhotosController < ApplicationController
   # DELETE /photos/1
   def destroy
     @photo.destroy
-    redirect_to photos_url, notice: 'Photo was successfully destroyed.'
+    redirect_to photos_url, notice: "Photo was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
-      @photo = Photo.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def photo_params
-      params.require(:photo).permit(:caption)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def photo_params
+    params.require(:photo).permit(:caption)
+  end
 end

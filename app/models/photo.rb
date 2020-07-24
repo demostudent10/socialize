@@ -6,5 +6,4 @@ class Photo < ApplicationRecord
   # Validations
 
   # Scopes
-
 end
