@@ -1,7 +1,6 @@
 <% was_validated = photo.errors.any? %>
 
 <%= form_with(model: photo, local: true, novalidate: true, class: "mb-3") do |f| %>
-  <!-- Label and input for caption start -->
   <div class="form-group">
     <% caption_class = "form-control" %>
     <% caption_was_invalid = photo.errors.include?(:caption) %>
@@ -15,9 +14,7 @@
     <% end %>
 
     <%= f.label :caption %>
-    <!-- Input for caption start -->
     <%= f.text_area :caption, class: caption_class, placeholder: "Enter caption" %>
-    <!-- Input for caption end -->
     <% if caption_was_invalid %>
       <% photo.errors.full_messages_for(:caption).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -26,6 +23,5 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for caption end -->
   <%= f.button class: "btn btn-outline-secondary btn-block" %>
 <% end %>
